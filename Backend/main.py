@@ -45,18 +45,23 @@ async def lifespan(app: FastAPI):
     pass
 
 # 3. App initialization with lifespan
-app = FastAPI(lifespan=lifespan, redirect_slashes=False)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com",
-        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com/" # Slash
-    ], #Replace it with S3 
+        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
+app.include_router(task_router)
+app.include_router(user_router)
+
+handler = Mangum(app, lifespan="off")
 
 app.include_router(auth_router)
 app.include_router(task_router)
