@@ -49,7 +49,10 @@ app = FastAPI(lifespan=lifespan, redirect_slashes=False)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com"], #Replace it with S3 
+    allow_origins=[
+        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com",
+        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com/" # Slash
+    ], #Replace it with S3 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
