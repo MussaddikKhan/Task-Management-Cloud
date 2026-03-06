@@ -1,7 +1,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-const API_BASE_URL = 'http://localhost:8000/';
+const API_BASE_URL = 'https://ahzrqrn5wowtpdwrevlmerndr40fhzqz.lambda-url.ap-south-1.on.aws';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
