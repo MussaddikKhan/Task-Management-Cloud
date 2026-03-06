@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://localhost:8000";
+export const API_BASE_URL = "https://ahzrqrn5wowtpdwrevlmerndr40fhzqz.lambda-url.ap-south-1.on.aws";
 
 import axios from "axios";
 
