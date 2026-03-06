@@ -2,10 +2,8 @@ import os
 from dotenv import load_dotenv
 from pathlib import Path
 
-ENV_PATH = Path(
-    "C:\\Pankaj's Space\\Projects\\FAST-API\\Task_Management_System\\Backend\\.env"
-)
-load_dotenv(ENV_PATH)
+
+load_dotenv()
 
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 

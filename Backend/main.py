@@ -10,6 +10,12 @@ import psycopg2
 import os
 from core.config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
+CORS_ORIGINS = [
+    "http://localhost:5173", 
+    "http://127.0.0.1:5173",
+    "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com"
+]
+
 # 1. Database Table Setup
 def setup_database_tables():
     try:
@@ -43,11 +49,12 @@ app = FastAPI(lifespan=lifespan, redirect_slashes=False)
 # 4. Middleware (Debug ke liye '*' rakhte hain pehle)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # 5. Routers (Sirf ek baar)
 app.include_router(auth_router)
