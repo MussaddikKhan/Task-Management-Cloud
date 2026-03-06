@@ -6,7 +6,7 @@ from schemas.user import UserResponse, UserCreate as UserCreateSchema
 
 user_router = APIRouter(prefix="/user", tags=["User"])
 
-@user_router.get("/", summary="Fetch all users")
+@user_router.get("", summary="Fetch all users")
 def fetch_all_users(
     db=Depends(get_db),
     current_user: dict = Depends(get_current_user)

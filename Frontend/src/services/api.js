@@ -55,7 +55,7 @@ export const taskAPI = {
 };
 
 export const userAPI = {
-  getAllUsers: () => api.get('/user/'),
+  getAllUsers: () => api.get('/user'),
   getUserById: (id) => api.get(`/user/id/${id}`),
 };
 
