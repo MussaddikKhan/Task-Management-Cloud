@@ -31,28 +31,25 @@ def setup_database_tables():
     except Exception as e:
         print(f"Database Setup Error: {e}")
 
-# 2. Lifespan for Lambda Cold Starts
+# 2. Lifespan logic
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     setup_database_tables()
     yield
 
-# 3. App Initialization (Strict Routing)
+# 3. Initialize App (Redirect Slashes False for AWS compatibility)
 app = FastAPI(lifespan=lifespan, redirect_slashes=False)
 
-# 4. Middleware (Added both slash and non-slash origins)
+# 4. Middleware (Debug ke liye '*' rakhte hain pehle)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com",
-        "http://task-manager-frontend-xyz123.s3-website.ap-south-1.amazonaws.com/"
-    ],
+    allow_origins=["*"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# 5. Include Routers (Only Once)
+# 5. Routers (Sirf ek baar)
 app.include_router(auth_router)
 app.include_router(task_router)
 app.include_router(user_router)
